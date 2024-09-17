@@ -2,17 +2,17 @@
 # DockerHub:                   https://hub.docker.com/r/microsoft/dotnet-sdk
 # Microsoft Artifact Registry: https://mcr.microsoft.com/en-us/product/dotnet/sdk/about
 
+# -- GIT clone
+# git clone --branch helloworld --depth 1 https://github.com/lihnjo/uniqa-helloworld
 
 # -- Build
-# docker build --no-cache -t helloworld .
+# docker build --no-cache -t helloworld:latest .
 
 # -- Run
 # docker run --rm -p 127.0.0.1:8080:8080 helloworld
 
 # -- Url
-# -- jttp://127.0.0.1:8080
-
-
+# -- http://127.0.0.1:8080
 
 
 # Use the .NET SDK to build and run the application
@@ -41,4 +41,3 @@ EXPOSE 8080
 
 # Command to run the application
 ENTRYPOINT ["dotnet", "SimpleDotNetWebApp.dll"]
-
