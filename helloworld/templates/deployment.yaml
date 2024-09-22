@@ -48,8 +48,10 @@ spec:
         env:
           - name: TZ
             value: {{ .Values.u_app.TZ | default "Etc/UTC" }}
-        command: ["tail"]
-        args: ["-f", "/dev/null"]
+        # command: ["tail"]
+        # args: ["-f", "/dev/null"]
+        command: ["dotnet"]
+        args: ["SimpleDotNetWebApp.dll"]
 
         ports:
           - name: http
