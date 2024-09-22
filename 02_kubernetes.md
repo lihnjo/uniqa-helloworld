@@ -69,10 +69,10 @@ docker run \
 mv -v   ~/.kube/config ~/.kube/config_2
 
 # -- Get-credentials from AKS
-az aks get-credentials --resource-group uniqa-rg --name uiniqa-aks
+az aks get-credentials --resource-group uniqa-rg --name uniqa-aks
 ```
 ```
-Merged "uiniqa-aks" as current context in /home/ehus/.kube/config
+Merged "uniqa-aks" as current context in /home/ehus/.kube/config
 ```
 <br>
 
