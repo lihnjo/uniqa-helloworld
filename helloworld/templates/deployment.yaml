@@ -48,7 +48,7 @@ spec:
         env:
           - name: TZ
             value: {{ .Values.u_app.TZ | default "Etc/UTC" }}
-        # command: ["tail"]
+        # command: ["/usr/bin/tail"]
         # args: ["-f", "/dev/null"]
         command: ["dotnet"]
         args: ["SimpleDotNetWebApp.dll"]
