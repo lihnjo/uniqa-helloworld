@@ -76,3 +76,68 @@ docker images
 REPOSITORY                     TAG            IMAGE ID       CREATED             SIZE
 helloworld                     latest         f6d5d07b416a   6 minutes ago       217MB
 ```
+
+
+**Add TAG**
+```bash
+docker tag helloworld:latest uniqa.azurecr.io/helloworld:latest
+```
+<br>
+
+**List docker images**
+```bash
+docker image ls
+# or
+docker images
+```
+```
+REPOSITORY                     TAG            IMAGE ID       CREATED        SIZE
+helloworld                     latest         f6d5d07b416a   22 hours ago   217MB
+uniqa.azurecr.io/helloworld    latest         f6d5d07b416a   22 hours ago   217MB
+```
+<br>
+
+**docker push**
+```bash
+docker push uniqa.azurecr.io/helloworld:latest
+```
+```
+The push refers to repository [uniqa.azurecr.io/helloworld]
+8e3baadda141: Pushed 
+ca859a701824: Pushed 
+34ae416b2123: Pushed 
+f65dd6626428: Pushed 
+cd861b0495bf: Pushed 
+a762b3e4b25a: Pushed 
+c5584e992acc: Pushed 
+8e2ab394fabf: Pushed 
+latest: digest: sha256:eca4629650c4e06c1fed0b8ec56fb760e2887534232e1eeda781bf6f99f05fd0 size: 1996
+```
+<br>
+
+
+**Delete docker images**
+```bash
+docker image rm helloworld:latest
+docker image rm uniqa.azurecr.io/helloworld:latest
+# or
+docker images
+```
+```
+REPOSITORY                     TAG            IMAGE ID       CREATED        SIZE
+```
+<br>
+
+
+**docker pull image**
+```bash
+docker pull uniqa.azurecr.io/helloworld:latest
+# or
+docker images
+```
+```
+REPOSITORY                     TAG            IMAGE ID       CREATED        SIZE
+uniqa.azurecr.io/helloworld    latest         f6d5d07b416a   22 hours ago   217MB
+```
+<br>
+
