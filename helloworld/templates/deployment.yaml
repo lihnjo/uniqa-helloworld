@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "helloworld.name" . }}
+  labels:
+    uniqa/department: uniqa
+    uniqa/app_name: backend
+    uniqa/app_type: backend
+    uniqa/app_lang: dotnet
+
+spec:
+  replicas: {{ .Values.replica | default 1 }}
+  selector:
+    matchLabels:
+      uniqa/app_name: {{ .Values.u_app.name }}
+
+  template:
+    metadata:
+      annotations:
+        uniqa/app_name: {{ .Values.u_app.name }}
+        uniqa/app_type: backend
+        uniqa/app_lang: dotnet
+        uniqa/department: uniqa
+      labels:
+        uniqa/app_name: {{ .Values.u_app.name }}
+        uniqa/app_type: backend
+        uniqa/app_lang: dotnet
+        uniqa/department: uniqa
+
+    spec:
+      # serviceAccount: {{ .Values.serviceAccount }}
+      restartPolicy: Always
+
+      containers:
+      - name: {{ .Values.u_app.name }}
+        image: {{ .Values.UniqaDockerRepository }}/{{ .Values.u_app.name }}:{{ .Values.u_app.image_tag }}
+        imagePullPolicy: Always
+
+      {{- if .Values.u_app.resources }}
+        resources:
+          requests:
+            cpu: {{ .Values.u_app.resources.min_cpu }}
+            memory: {{ .Values.u_app.resources.max_memory }}
+          limits:
+            memory: {{ .Values.u_app.resources.max_memory }}
+      {{- end }}
+
+        env:
+          - name: TZ
+            value: {{ .Values.u_app.TZ | default "Etc/UTC" }}
+        command: ["tail"]
+        args: ["-f", "/dev/null"]
+
+        ports:
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+
+ 

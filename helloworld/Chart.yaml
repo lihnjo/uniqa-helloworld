@@ -1,0 +1,19 @@
+---
+apiVersion: v2
+name: helloworld
+description: A Helm chart for UNIQA PoC
+
+version: '0.1.0'
+appVersion: '0.1.0'
+
+keywords:
+  - uniqa
+  - backend
+  - dotnet
+
+type: application
+
+maintainers:
+  - name: Edin Husejnefendic
+    email: Edin.Husejnefendic@example.com
+    url: https://example.com
