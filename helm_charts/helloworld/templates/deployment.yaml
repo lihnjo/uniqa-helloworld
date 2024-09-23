@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  {{ include "helloworld.name" . }}
+  name:  {{ .Values.u_app.name }}
+  namespace:  {{ .Release.Namespace }}
   labels:
     uniqa/department: uniqa
     uniqa/app_name: backend

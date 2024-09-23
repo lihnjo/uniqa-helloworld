@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.u_app.name }}
+  namespace:  {{ .Release.Namespace }}
+
+  labels:
+    service_name: {{ .Values.u_app.name }}
+
+spec:
+  type: ClusterIP
+  selector:
+    uniqa/app_name: {{ .Values.u_app.name }}
+  ports:
+    - protocol: TCP
+      port: 8080
+      name: port-{{ .Values.u_app.name }}
+      targetPort: 8080

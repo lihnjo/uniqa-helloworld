@@ -1,0 +1,44 @@
+---
+
+# -- INFO ------------------------------------------------------------------------------------------------------------
+# Haproxy values.yml                      - https://github.com/haproxytech/helm-charts/blob/main/kubernetes-ingress/values.yaml
+# Haproxy ingress DockerHub               - https://hub.docker.com/r/haproxytech/kubernetes-ingress/tags
+# GitHub haproxytech/kubernetes-ingress   - https://github.com/haproxytech/kubernetes-ingress 
+# Haproxy HELM                            - https://github.com/haproxytech/helm-charts/tree/main/kubernetes-ingress
+# Haproxy IP address logging              - https://www.haproxy.com/blog/logging-with-the-haproxy-kubernetes-ingress-controller
+# Haproxy options Controler               - https://www.haproxy.com/documentation/kubernetes-ingress/community/configuration-reference/configmap/
+# Haproxy options ConfigMap               - https://www.haproxy.com/documentation/kubernetes-ingress/community/configuration-reference/configmap/
+# Haproxy Cloudflare IP addresses         - https://discourse.haproxy.org/t/log-real-ip-from-header/4144
+# --------------------------------------------------------------------------------------------------------------------
+
+
+# -- Install (Modify  clusterrolebindings before run below command) --------------------------------------------------
+# kubectl create ns haproxy
+# helm upgrade --install --namespace haproxy --history-max 3 --version 1.40.1 haproxy haproxytech/kubernetes-ingress --values values.yaml
+
+# --------------------------------------------------------------------------------------------------------------------
+
+
+# -- Values ----------------------------------------------------------------------------------------------------------
+rbac:
+  create: true
+serviceAccount:
+  create: true
+
+namespaceOverride: haproxy
+
+kind: Deployment
+
+controller:
+  ingressClass: haproxy
+  replicaCount: 1
+  service:
+    type: LoadBalancer
+
+  logging:
+    traffic:
+      address: stdout
+      format: raw
+      facility: daemon
+
+# -------------------------------------------------------------------------------------------------------------------
