@@ -1,0 +1,24 @@
+// ===== THIS IS DEVELOPER PART FOR CONFIGURATION !!! ================================================================
+// PLEASE SORT BY NAME
+
+
+// ***** Jenkisfile component configuration ***********************************
+def config = [
+    // ***** BACKENDS *********************************************************
+    "HELLOWORLD": [
+        'java_ver':       '21',
+        'GIT':            'git@github.com:lihnjo/uniqa-helloworldp.git',
+        'Branch_name':    'helloworld',
+        'configProperty': 'core',
+        'cmd_build':      'mvn -D "image.registry=harbor.zira.ba/vmo2/" \
+                               -D "image.properties.tags.latest=latest_vmo2-zira-dev" \
+                                clean package docker:push docker:remove \
+                               -P !default,!observability,docker,zira-harbor,kubernetes',
+        'app':            'backend',
+        'name':           'factory',
+        'k8s_type':       'deployment'
+    ]
+
+]
+
+return config
