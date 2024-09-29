@@ -5,7 +5,7 @@ u_app:
   image_tag: latest
   TZ: Europe/Sarajevo
   resources:
-    min_cpu: "100m"
+    min_cpu: "50m"
     min_memory: "256Mi"
     max_memory: "256Mi"
 

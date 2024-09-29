@@ -6,7 +6,7 @@ backend:
     image_tag: latest
     TZ: Europe/Sarajevo
     resources:
-      min_cpu: "200m"
+      min_cpu: "50m"
       min_memory: "384Mi"
       max_memory: "384Mi"
 
