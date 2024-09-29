@@ -6,7 +6,7 @@
 def config = [
     // ***** BACKENDS *********************************************************
     "HELLOWORLD": [
-        'GIT':            'git@github.com:lihnjo/uniqa-helloworldp.git',
+        'GIT':            'git@github.com:lihnjo/uniqa-helloworld.git',
         'Branch_name':    'helloworld',
         'cmd_build':      'docker build --no-cache -t helloworld:latest',
         'app':            'backend',
