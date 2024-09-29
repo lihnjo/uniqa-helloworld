@@ -1,0 +1,15 @@
+backend:
+  UniqaDockerRepository: 'uniqa.azurecr.io'
+
+  u_app:
+    name: helloworld
+    image_tag: latest
+    TZ: Europe/Sarajevo
+    resources:
+      min_cpu: "200m"
+      min_memory: "384Mi"
+      max_memory: "384Mi"
+
+  serviceAccount: uniqa-read
+
+  replica: 2

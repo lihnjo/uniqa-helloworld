@@ -1,0 +1,6 @@
+dependencies:
+- name: backend
+  repository: oci://uniqa.azurecr.io/baseline_chart
+  version: 0.1.0
+digest: sha256:ec5b73a837f5f14829c3954255e460fba58eeb4cfd99144e971077048b7d44af
+generated: "2024-09-29T22:30:04.91132789+02:00"

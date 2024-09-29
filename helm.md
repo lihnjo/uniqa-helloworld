@@ -41,10 +41,14 @@ source <(helm completion bash)
 source ~/.bashrc
 ```
 <br>
+<br>
+
+# Helm Chart #
+<br>
 
 **Test helm template by helm cli**
 ```bash
-helm template helloworld helm_charts/helloworld -f helm_charts/helloworld/values.yaml
+helm template helloworld helm_charts/backend -f helm_charts/backend/values.yaml
 ```
 <br>
 
@@ -76,17 +80,26 @@ docker run -ti --rm \
            -v ~/.cache/helm/:/.cache/helm/ \
            -w /apps              \
            alpine/helm:latest    \
-           template helloworld helm_charts/helloworld -f helm_charts/helloworld/values.yaml
+           template helloworld helm_charts/backend -f helm_charts/backend/values.yaml
+```
+<br>
+
+**Helm push OCI**
+```bash
+helm package helm_charts/backend
+helm push backend-0.1.0.tgz oci://uniqa.azurecr.io/baseline_chart
 ```
 <br>
 <br>
+
+
 
 # Install helm charts - helloworld #
 <br>
 
 **Test helm template by helm cli**
 ```bash
-helm template helloworld helm_charts/helloworld -f helm_charts/helloworld/values.yaml
+helm template helloworld helm_charts/backend -f helm_charts/backend/values.yaml
 ```
 <br>
 
@@ -102,7 +115,7 @@ docker run -ti --rm \
            -v ~/.cache/helm/:/.cache/helm/ \
            -w /apps              \
            alpine/helm:latest    \
-           template helloworld helm_charts/helloworld -f helm_charts/helloworld/values.yaml
+           template helloworld helm_charts/backend -f helm_charts/backend/values.yaml
 ```
 <br>
 
@@ -114,8 +127,8 @@ helm upgrade                \
   --history-max 3           \
   --namespace uniqa-dev     \
   helloworld                \
-  helm_charts/helloworld    \
-  -f helm_charts/helloworld/values.yaml
+  helm_charts/backend       \
+  -f helm_charts/backend/values.yaml
 ```
 <br>
 
@@ -136,12 +149,11 @@ docker run -ti --rm \
             --history-max 3           \
             --namespace uniqa-dev     \
             helloworld                \
-            helm_charts/helloworld    \
-            -f helm_charts/helloworld/values.yaml
+            helm_charts/backend       \
+            -f helm_charts/backend/values.yaml
 
 ```
 <br>
-
 
 
 # Install ingress haproxy #
@@ -236,3 +248,65 @@ For more examples and up to date documentation, please visit:
 ```bash
 kubectl -n haproxy get all
 ```
+<br>
+<br>
+
+# Helm Chart umbrella #
+<br>
+
+**Test helm umbrella template by helm cli**
+```bash
+helm template --dependency-update helloworld helm_umbrella_helloworld-f helm_umbrella_helloworld/values.yaml
+```
+<br>
+
+**Test helm umbrella template by helm docker image**
+```bash
+docker run -ti --rm \
+           -u $(id -u):$(id -g)  \
+           --pull always         \
+           -v $(pwd):/apps       \
+           -v ~/.kube/config:/.kube/config \
+           -v ~/.helm:/.helm               \
+           -v ~/.config/helm:/.config/helm \
+           -v ~/.cache/helm/:/.cache/helm/ \
+           -w /apps              \
+           alpine/helm:latest    \
+           template helloworld --dependency-update helm_umbrella_helloworld -f helm_umbrella_helloworld/values.yaml
+```
+<br>
+
+**Install/Upgrade helm chart by helm cli**
+```bash
+helm upgrade                \
+  --install                 \
+  --dependency-update       \
+  --history-max 3           \
+  --namespace uniqa-dev     \
+  helloworld                \
+  helm_umbrella_helloworld/ \
+  -f helm_umbrella_helloworld/values.yaml
+```
+<br>
+
+**Install/Upgrade helm umbrella chart by docker image**
+```bash
+docker run -ti --rm \
+           -u $(id -u):$(id -g)  \
+           --pull always         \
+           -v $(pwd):/apps       \
+           -v ~/.kube/config:/.kube/config \
+           -v ~/.helm:/.helm               \
+           -v ~/.config/helm:/.config/helm \
+           -v ~/.cache/helm/:/.cache/helm/ \
+           -w /apps              \
+           alpine/helm:latest    \
+           upgrade                    \
+            --install                 \
+            --history-max 3           \
+            --namespace uniqa-dev     \
+            helloworld                \
+            helm_umbrella_helloworld    \
+            -f helm_umbrella_helloworld/values.yaml
+```
+<br>

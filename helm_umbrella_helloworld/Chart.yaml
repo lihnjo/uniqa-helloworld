@@ -1,0 +1,24 @@
+---
+apiVersion: v2
+name: helloworld
+description: A Helm umbrella chart for UNIQA backends
+
+version: 0.0.1
+appVersion: "1.0.0"
+
+dependencies:
+  - name: backend
+    version: "0.1.0"
+    repository: "oci://uniqa.azurecr.io/baseline_chart"
+
+keywords:
+  - uniqa
+  - backend
+  - dotnet
+
+type: application
+
+maintainers:
+  - name: Edin Husejnefendic
+    email: Edin.Husejnefendic@example.com
+    url: https://example.com
