@@ -1,0 +1,61 @@
+---
+# --1st time
+# mkdir -vp /opt/uniqa/jenkins/tmp
+
+# -- Check syntax
+# docker-compose -f docker-compose.yml config
+
+# -- Restart
+# docker compose restart jenkins
+
+# -- buidl and Restart
+# docker-compose down; docker-compose up -d
+
+
+# --- Logs --------------------------------------
+# docker-compose logs -f jenkins
+
+
+version: "3.7"
+services:
+  jenkins:
+    image: uniqajenkins:latest
+    # privileged: true
+    environment:
+     - TZ=Europe/Sarajevo
+    ports:
+      - 0.0.0.0:8080:8080
+
+#    command: >
+#      sh -c "ln -snf /usr/share/zoneinfo/${ENV_TZ} /etc/localtime && export TZ=${ENV_TZ} &&  /usr/bin/tail -f /dev/null"
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "uniqajenkins:latest"
+        env: "z_core"
+
+    volumes:
+      - type: bind
+        source: /opt/uniqa/jenkins
+        target: /home/jenkins
+
+      - type: bind
+        source: /opt/uniqa/jenkins/tmp
+        target: /tmp
+
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+
+    #healthcheck:
+    #  test: ["CMD", "/bin/bash", "-c", "curl --fail-early https://jenkins.zira.ba || exit 1"]
+    #  interval: 5s
+    #  timeout: 3s
+    #  retries: 6
+    #  start_period: 20s
+    #stop_grace_period: 10s
+
+    restart: "unless-stopped"
