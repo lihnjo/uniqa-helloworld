@@ -6,13 +6,11 @@
 def config = [
     // ***** BACKENDS *********************************************************
     "HELLOWORLD": [
-        'java_ver':       '21',
-        'GIT':            'git@github.com:lihnjo/uniqa-helloworldp.git',
+        'GIT':            'git@github.com:lihnjo/uniqa-helloworld.git',
         'Branch_name':    'helloworld',
-        'configProperty': 'core',
-        'cmd_build':      'mvn ',
+        'cmd_build':      'docker build --no-cache -t helloworld:latest',
         'app':            'backend',
-        'name':           'factory',
+        'name':           'helloworld',
         'k8s_type':       'deployment'
     ]
 
